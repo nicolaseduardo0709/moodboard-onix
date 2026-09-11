@@ -1,8 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #09090b;
-  --foreground: #f4f4f5;
+  --background: #121212;
+  --foreground: #e0e0e0;
+  --card-bg: #1e1e1e;
+  --card-border: #2a2a2a;
+  --surface: #181818;
+  --text-muted: #808080;
+  --text-secondary: #a0a0a0;
+  --accent: #FF0066;
+  --accent-hover: #E0005A;
 }
 
 @theme inline {
@@ -21,4 +28,22 @@ body {
 * {
   scrollbar-width: thin;
   scrollbar-color: #3f3f46 transparent;
+}
+
+.masonry-grid {
+  column-count: 5;
+  column-gap: 12px;
+}
+
+@media (max-width: 1280px) {
+  .masonry-grid { column-count: 4; }
+}
+@media (max-width: 1024px) {
+  .masonry-grid { column-count: 3; }
+}
+@media (max-width: 768px) {
+  .masonry-grid { column-count: 2; }
+}
+@media (max-width: 480px) {
+  .masonry-grid { column-count: 1; }
 }

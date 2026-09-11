@@ -61,20 +61,22 @@ export default function AddPostModal({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
       <div
-        className="bg-zinc-900 rounded-xl border border-zinc-700 w-full max-w-md"
+        className="bg-[#1e1e1e] rounded-xl border border-[#333] w-full max-w-md shadow-2xl"
         onPaste={handlePaste}
       >
-        <div className="flex items-center justify-between p-4 border-b border-zinc-800">
-          <h2 className="text-base font-semibold text-zinc-200">
-            Novo Post
+        <div className="flex items-center justify-between p-4 border-b border-[#2a2a2a]">
+          <h2 className="text-base font-bold text-white">
+            Nova publicação
           </h2>
           <button
             onClick={onClose}
-            className="text-zinc-500 hover:text-zinc-300 text-xl cursor-pointer"
+            className="text-[#666] hover:text-[#aaa] cursor-pointer"
           >
-            ✕
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
           </button>
         </div>
 
@@ -84,21 +86,18 @@ export default function AddPostModal({
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Título do post"
-            className="w-full bg-zinc-800 text-sm text-zinc-200 rounded-lg px-3 py-2 border border-zinc-700 outline-none focus:border-zinc-500 placeholder:text-zinc-600"
+            className="w-full bg-[#2a2a2a] text-sm text-white rounded-lg px-3 py-2.5 border border-[#333] outline-none focus:border-[#555] placeholder:text-[#666]"
           />
 
           <div
-            onDragOver={(e) => {
-              e.preventDefault();
-              setDragActive(true);
-            }}
+            onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
             onDragLeave={() => setDragActive(false)}
             onDrop={handleDrop}
             onClick={() => fileRef.current?.click()}
-            className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors ${
+            className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors ${
               dragActive
-                ? "border-zinc-400 bg-zinc-800"
-                : "border-zinc-700 hover:border-zinc-600"
+                ? "border-[#555] bg-[#252525]"
+                : "border-[#333] hover:border-[#444]"
             }`}
           >
             {imagePreview ? (
@@ -108,8 +107,14 @@ export default function AddPostModal({
                 className="max-h-48 mx-auto rounded"
               />
             ) : (
-              <div className="text-zinc-500 text-sm">
-                <p>Arraste uma imagem, cole (Ctrl+V) ou clique para selecionar</p>
+              <div className="text-[#666] text-sm">
+                <svg className="mx-auto mb-2" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <rect x="3" y="3" width="18" height="18" rx="2" />
+                  <circle cx="8.5" cy="8.5" r="1.5" />
+                  <path d="m21 15-5-5L5 21" />
+                </svg>
+                <p>Arraste uma imagem, cole (Ctrl+V)</p>
+                <p className="text-xs mt-1">ou clique para selecionar</p>
               </div>
             )}
             <input
@@ -124,7 +129,11 @@ export default function AddPostModal({
             />
           </div>
 
-          <div className="text-center text-xs text-zinc-600">ou</div>
+          <div className="flex items-center gap-3">
+            <div className="flex-1 h-px bg-[#333]" />
+            <span className="text-xs text-[#666]">ou</span>
+            <div className="flex-1 h-px bg-[#333]" />
+          </div>
 
           <input
             type="url"
@@ -135,21 +144,21 @@ export default function AddPostModal({
               setImagePreview("");
             }}
             placeholder="Colar URL da imagem"
-            className="w-full bg-zinc-800 text-sm text-zinc-200 rounded-lg px-3 py-2 border border-zinc-700 outline-none focus:border-zinc-500 placeholder:text-zinc-600"
+            className="w-full bg-[#2a2a2a] text-sm text-white rounded-lg px-3 py-2.5 border border-[#333] outline-none focus:border-[#555] placeholder:text-[#666]"
           />
         </div>
 
-        <div className="flex justify-end gap-2 p-4 border-t border-zinc-800">
+        <div className="flex justify-end gap-2 p-4 border-t border-[#2a2a2a]">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-sm text-zinc-400 hover:text-zinc-200 cursor-pointer"
+            className="px-4 py-2 text-sm text-[#888] hover:text-white cursor-pointer rounded-lg"
           >
             Cancelar
           </button>
           <button
             onClick={handleSubmit}
             disabled={!title.trim() || (!imageFile && !imageUrl.trim())}
-            className="px-4 py-2 text-sm bg-white text-black rounded-lg font-medium hover:bg-zinc-200 disabled:opacity-30 disabled:cursor-default cursor-pointer"
+            className="px-5 py-2 text-sm bg-[#FF0066] text-white rounded-full font-semibold hover:bg-[#E0005A] disabled:opacity-30 disabled:cursor-default cursor-pointer"
           >
             Publicar
           </button>

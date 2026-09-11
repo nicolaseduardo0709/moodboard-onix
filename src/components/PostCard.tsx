@@ -23,28 +23,22 @@ export default function PostCard({
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <article className="bg-zinc-900 rounded-lg overflow-hidden border border-zinc-800 break-inside-avoid mb-4">
-      <div className="relative group">
-        <img
-          src={post.imageUrl}
-          alt={post.title}
-          className="w-full object-cover cursor-pointer"
-          onClick={() => onExpand(post)}
-          loading="lazy"
-        />
-      </div>
-
-      <div className="p-3">
-        <div className="flex items-start justify-between">
-          <h3 className="text-sm font-medium text-zinc-200 mb-1">
+    <article className="post-card bg-[#1e1e1e] rounded-lg overflow-hidden border border-[#2a2a2a] break-inside-avoid mb-3 hover:border-[#3a3a3a] transition-colors">
+      {post.title && (
+        <div className="px-3 pt-3 pb-1 flex items-start justify-between">
+          <h3 className="text-sm font-bold text-white leading-snug">
             {post.title}
           </h3>
-          <div className="relative">
+          <div className="relative shrink-0 ml-1">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="text-zinc-500 hover:text-zinc-300 text-lg leading-none cursor-pointer px-1"
+              className="text-[#666] hover:text-[#aaa] cursor-pointer p-0.5 leading-none"
             >
-              ⋯
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <circle cx="12" cy="5" r="2" />
+                <circle cx="12" cy="12" r="2" />
+                <circle cx="12" cy="19" r="2" />
+              </svg>
             </button>
             {menuOpen && (
               <>
@@ -52,22 +46,16 @@ export default function PostCard({
                   className="fixed inset-0 z-10"
                   onClick={() => setMenuOpen(false)}
                 />
-                <div className="absolute right-0 top-6 bg-zinc-800 border border-zinc-700 rounded-lg shadow-xl z-20 py-1 min-w-[140px]">
+                <div className="absolute right-0 top-6 bg-[#2a2a2a] border border-[#3a3a3a] rounded-lg shadow-2xl z-20 py-1 min-w-[150px]">
                   <button
-                    onClick={() => {
-                      onExpand(post);
-                      setMenuOpen(false);
-                    }}
-                    className="w-full text-left px-3 py-2 text-xs text-zinc-300 hover:bg-zinc-700 cursor-pointer"
+                    onClick={() => { onExpand(post); setMenuOpen(false); }}
+                    className="w-full text-left px-3 py-2 text-xs text-[#ccc] hover:bg-[#333] cursor-pointer"
                   >
                     Visualizar
                   </button>
                   <button
-                    onClick={() => {
-                      onDelete(post.id);
-                      setMenuOpen(false);
-                    }}
-                    className="w-full text-left px-3 py-2 text-xs text-red-400 hover:bg-zinc-700 cursor-pointer"
+                    onClick={() => { onDelete(post.id); setMenuOpen(false); }}
+                    className="w-full text-left px-3 py-2 text-xs text-red-400 hover:bg-[#333] cursor-pointer"
                   >
                     Excluir
                   </button>
@@ -76,8 +64,22 @@ export default function PostCard({
             )}
           </div>
         </div>
+      )}
 
-        <div className="text-[10px] text-zinc-600 mb-1">Estrelas</div>
+      <div
+        className="cursor-pointer"
+        onClick={() => onExpand(post)}
+      >
+        <img
+          src={post.imageUrl}
+          alt={post.title}
+          className="w-full object-cover"
+          loading="lazy"
+        />
+      </div>
+
+      <div className="px-3 pt-2 pb-3">
+        <div className="text-[10px] text-[#888] mb-1 uppercase tracking-wide">Estrelas</div>
         <StarRating
           ratings={post.ratings}
           onRate={(r) => onRate(post.id, r)}
