@@ -15,6 +15,7 @@
     "react-dom": "19.2.8",
     "uuid": "^14.0.2"
   },
+  "allowScripts": true,
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
