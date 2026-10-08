@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Moodboard Onix Studio",
-  description: "Espaço para adicionar conceitos e elementos visuais.",
+  title: "Onix Studio",
+  description: "Sistema de gestao de projetos de identidade visual.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
